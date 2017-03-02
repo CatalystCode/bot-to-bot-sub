@@ -33,10 +33,15 @@ var bot = new builder.UniversalBot(connector, {
   storage: new builder.MemoryBotStorage()
 });
 
-var i = 0;
 bot.dialog('/', [
   (session, args, next) => {
-    builder.Prompts.text(session, `**SubBot**: step ${i++}, enter something....`);
+
+    // keep track of the user's steps in the dialog
+    if (!session.privateConversationData.step) {
+      session.privateConversationData.step = 1;
+    }
+
+    builder.Prompts.text(session, `** -SlaveBot- **: step ${session.privateConversationData.step++}, enter something....`);
   },
   (session, args, next) => {
     //session.send(`you typed ${args.response}`);
