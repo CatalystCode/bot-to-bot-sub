@@ -29,32 +29,17 @@ var connector = new builder.ChatConnector({
   appPassword: config.get('BOT_APP_PASSWORD') 
 });
 
-var bot = new builder.UniversalBot(connector);
-
+var bot = new builder.UniversalBot(connector, {
+  storage: new builder.MemoryBotStorage()
+});
 
 var i = 0;
 bot.dialog('/', [
   (session, args, next) => {
-    builder.Prompts.text(session, `SubBot1: iteration:${i} step 1, enter something....`);
+    builder.Prompts.text(session, `**SubBot**: step ${i++}, enter something....`);
   },
   (session, args, next) => {
-    session.send(`you typed ${args.response}`);
-    builder.Prompts.text(session, `SubBot1: iteration:${i} step 2, enter something....`);
-  },
-  (session, args, next) => {
-    session.send(`you typed ${args.response}`);
-    builder.Prompts.text(session, `SubBot1: iteration:${i} step 3, enter something....`);
-  },
-  (session, args, next) => {
-    session.send(`you typed ${args.response}`);
-    builder.Prompts.text(session, `SubBot1: iteration:${i} step 4, enter something....`);
-  },
-  (session, args, next) => {
-    session.send(`you typed ${args.response}`);
-    builder.Prompts.text(session, `SubBot1: iteration:${i} step 5, enter something....`);
-  },
-  session => {
-    i++;
+    //session.send(`you typed ${args.response}`);
     session.replaceDialog('/', 0);
   }
 ]);
