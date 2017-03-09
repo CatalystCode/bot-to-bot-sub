@@ -2,6 +2,7 @@ var path = require('path');
 var express = require('express');
 var builder = require('botbuilder');
 var fs = require('fs');
+var bodyParser = require('body-parser')
 var port = process.env.PORT || 3978;
 var app = express();
 
@@ -11,13 +12,33 @@ var config = require('./config');
 
 app.use((req, res, next) => {
   console.log(`service request for url: '${req.url}'`);
+  console.log(`headers:\n${JSON.stringify(req.headers, true, 2)}\n\n`);
+  
+
+  /*
+  var data = '';
+  req.on('data', chunk => {
+    data += chunk.toString(); 
+    console.log('data: ', data);
+  });
+  req.on('end', () => {
+    var json = JSON.parse(data);
+    console.log(`body: ${JSON.stringify(data, 2, true)}`);
+    res.end();
+  });
+  req.on('error', () => console.error(err))
+  */
   return next();
 });
 
-app.use('/alexa', (req, res, next) => {
-  console.log(`service request for alexa: '${req.url}'`);
-  return res.end('OK');
+
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  console.log(`body:\n${JSON.stringify(req.body, true, 2)}`);
+  return next();
 });
+
 
 app.get('/', (req, res) => {
   return res.end('Dating Bot is on');

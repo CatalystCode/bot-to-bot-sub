@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "azure-storage": "^1.4.0",
+    "body-parser": "^1.17.1",
     "botbuilder": "3.4.4",
     "chai": "^3.5.0",
     "documentdb": "^1.10.0",
