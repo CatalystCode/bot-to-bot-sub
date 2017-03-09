@@ -26,7 +26,7 @@ app.use((req, res, next) => {
     console.log(`body: ${JSON.stringify(data, 2, true)}`);
     res.end();
   });
-  req.on('error', () => console.error(err))
+  req.on('error', err => console.error(err))
   */
   return next();
 });
