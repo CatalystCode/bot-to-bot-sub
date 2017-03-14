@@ -14,15 +14,9 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use('/alexa', (req, res, next) => {
-  console.log(`service request for alexa: '${req.url}'`);
-  return res.end('OK');
-});
-
 app.get('/', (req, res) => {
-  return res.end('Dating Bot is on');
+  return res.end('Slave Bot is on');
 });
-
 
 var connector = new builder.ChatConnector({ 
   appId: config.get('BOT_APP_ID'), 
