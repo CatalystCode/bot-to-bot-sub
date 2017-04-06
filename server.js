@@ -44,7 +44,7 @@ bot.dialog('/', [
     
     // actively leave the sub bot and resume control for the master bot if user asks to leave
     if (args.response && args.response.startsWith('leave')) {
-      session.endDialog('returning control to master');
+      session.endDialog('** -SlaveBot- **: returning control to master');
       var url = masterBotEndpoint + '/api/leave/' + session.message.address.conversation.id;
       return request.post(url, err => {
         if (err) console.error(`error in http request: ${url}: ${err}`)
